@@ -38,6 +38,19 @@ public class Main {
         if(n >= 0 && n <= 9) return n;
         return sOd(n/10) + n%10;
     }
+    static int pow1(int p, int q){
+        if(q == 0) return 1;
+        return pow1(p, q-1) * p;
+    }
+    static int pow2(int p, int q){
+        if(q == 0) return 1;
+        if(q%2==0){
+            int smallPow = pow2(p, q/2);
+            return smallPow*smallPow;
+        }
+        int smallPow = pow2(p, q/2);
+        return smallPow*smallPow*p;
+    }
 
     static void main(String[] args) {
 //        System.out.println(fibonacci(2));
