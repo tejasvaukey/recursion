@@ -51,9 +51,41 @@ public class Main {
         int smallPow = pow2(p, q/2);
         return smallPow*smallPow*p;
     }
+    static int seriesSum(int n){
+        if(n == 0)return 0;
+        return seriesSum(n-1) + n;
+    }
+    static void printMultiples(int n, int k){
+        if(k == 0) return;
+        printMultiples(n, k-1);
+        System.out.print(n*k +" ");
+    }
+    static int seriesSumAlt(int n){
+        if(n == 0) return 0;
+        if(n%2 == 0) return seriesSumAlt(n-1) - n;
+        return seriesSumAlt(n-1) + n;
+    }
+    static int iGCD(int a, int b){
+        while(a%b !=0){
+            int rem = a % b;
+            a = b;
+            b = rem;
+        }
+        return b;
+    }
+    static int gcd(int a, int b){
+        if(b == 0) return a;
+        return gcd(b, a%b);
+    }
+    static int lcm(int a, int b){
+        if(a == 0 || b == 0) return 0;
+        int gcd = gcd(a,b);
+        return a*b/gcd;
+    }
 
     static void main(String[] args) {
 //        System.out.println(fibonacci(2));
-        fibonacci(5);
+        int s = lcm(45,15);
+        System.out.println(s);
     }
 }
