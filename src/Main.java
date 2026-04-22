@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Main {
 
     static void printN(int n) {
@@ -20,7 +23,7 @@ public class Main {
     }
     static void fibonacci(int n){
         int a = 0, b = 1;
-        for (int i = 0; i <= n; i++) {
+        for (int idx= 0; idx<= n; idx++) {
             System.out.print(a +" ");
             int next = a + b;
             a = b;
@@ -82,10 +85,57 @@ public class Main {
         int gcd = gcd(a,b);
         return a*b/gcd;
     }
+    static void printArray(int[] arr, int idx){
+        if(idx == arr.length) return;
+        System.out.print(arr[idx] +" ");
+        printArray(arr, idx+1);
+    }
+    static int maxInArray(int[] arr, int idx){
+        if(idx == arr.length-1) return arr[idx];
+        int max = maxInArray(arr, idx+1);
+        return Math.max(arr[idx], max);
+    }
+    static int sumOfArray(int[] arr, int idx){
+        if(idx == arr.length) return 0;
+        return sumOfArray(arr, idx+1) + arr[idx];
+    }
+    static boolean linearSearch(int[] arr, int idx, int target){
+        if(idx >= arr.length) return false;
+        if(arr[idx] == target) return true;
+        return linearSearch(arr, idx+1, target);
+    }
+    static int findFirstIndex(int[] arr, int idx, int target){
+        if(idx >= arr.length) return -1;
+        if(arr[idx] == target) return idx;
+        return findFirstIndex(arr, idx+1, target);
+    }
+    static void findAllIndex(int[] arr, int idx, int target){
+        if(idx>= arr.length) return;
+        if(arr[idx] == target) System.out.print(idx +" ");;
+        findAllIndex(arr, idx+1, target);
+    }
+    static ArrayList<Integer> allIndices(int[] arr, int idx, int target){
+        int n = arr.length;
+        if(idx >= n) return new ArrayList<>();
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        if(arr[idx] == target) ans.add(idx);
+
+        ArrayList<Integer> recurse = allIndices(arr, idx+1, target);
+        ans.addAll(recurse);
+        return ans;
+    }
+
 
     static void main(String[] args) {
 //        System.out.println(fibonacci(2));
-        int s = lcm(45,15);
-        System.out.println(s);
+//        int s = lcm(45,15);
+//        System.out.println(s);
+        int[] arr = {1,2,3,4,2,5,2};
+//        findAllIndex(arr, 0, 2);
+        ArrayList<Integer> ans = allIndices(arr, 0, 2);
+        for(Integer i: ans){
+            System.out.print(i +" ");
+        }
     }
 }
