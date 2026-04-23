@@ -116,8 +116,8 @@ public class Main {
     }
     static ArrayList<Integer> allIndices(int[] arr, int idx, int target){
         int n = arr.length;
-        if(idx >= n) return new ArrayList<>();
         ArrayList<Integer> ans = new ArrayList<>();
+        if(idx >= n) return ans;
 
         if(arr[idx] == target) ans.add(idx);
 
