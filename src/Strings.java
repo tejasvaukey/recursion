@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Strings {
@@ -52,6 +53,30 @@ public class Strings {
         if(l >= r) return true;
         return (s.charAt(l) == s.charAt(r) && checkPalindrome2(s, l+1, r-1));
     }
+    static ArrayList<String> getSSQ(String s){
+        ArrayList<String> ans = new ArrayList<>();
+        if(s.isEmpty()) {
+            ans.add("");
+            return ans;
+        }
+        char curr = s.charAt(0);
+        ArrayList<String> smallAns = getSSQ(s.substring(1));
+        for(String ss: smallAns) {
+            ans.add(ss);
+            ans.add(curr + ss);
+        }
+        return ans;
+    }
+    static void printAllSSQ(String s, String currAns){ // string and ""
+        if(s.isEmpty()) {
+            System.out.print(currAns);
+            return;
+        }
+        char curr = s.charAt(0);
+        String remString = s.substring(1);
+        printAllSSQ(remString, currAns + curr);
+        printAllSSQ(remString, currAns);
+    }
 
     static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -60,6 +85,9 @@ public class Strings {
 //        char ch = s.charAt(1);
 //        System.out.print(s.substring(2,4));
 //        System.out.print(s.substring(2));
-        System.out.println(checkPalindrome(s));;
+//        System.out.println(checkPalindrome(s));
+        printAllSSQ(s,"");
+
+
     }
 }

@@ -125,6 +125,24 @@ public class Main {
         ans.addAll(recurse);
         return ans;
     }
+    static void subsetSum(int[] arr, int n, int idx, int sum){
+        if(idx >= n){
+            System.out.print(sum);
+            return;
+        }
+        subsetSum(arr, n, idx+1, sum + arr[idx]);
+        subsetSum(arr, n, idx+1, sum);
+    }
+    static int best(int[] h, int n, int idx){ // frog problem
+        if(idx == n-1) return 0;
+        int op1 = Math.abs(h[idx] - h[idx+1]) + best(h, n, idx+1);
+        if(idx == n-2) return op1;
+        int op2 = Math.abs(h[idx] - h[idx+2]) + best(h, n, idx+2);
+        return Math.max(op1,op2);
+    }
+    static int characterValue(char ch){
+       return ch-'0';
+    }
 
 
     static void main(String[] args) {
@@ -137,5 +155,6 @@ public class Main {
         for(Integer i: ans){
             System.out.print(i +" ");
         }
+//        subsetSum(arr, arr.length, 0, 0);
     }
 }
